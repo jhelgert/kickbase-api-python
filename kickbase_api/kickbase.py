@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from typing import Union
+from typing import Union, List
 
 import requests
 import json
@@ -219,7 +219,8 @@ class Kickbase:
         r = self._do_get("/leagues/{}/players/{}/stats".format(league_id, player_id), True)
 
         if r.status_code == 200:
-            return PlayerStats(r.json()["leaguePlayer"])
+            q = {**r.json()['leaguePlayer'], **{'marketValues': r.json()['marketValues']}}
+            return PlayerStats(q)
         else:
             raise KickbaseException()
 
