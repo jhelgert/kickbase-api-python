@@ -1,5 +1,6 @@
 from kickbase_api.models.base_model import BaseModel
-
+from typing import List
+from datetime import datetime
 
 class PlayerStats(BaseModel):
     market_value_change: int = None
