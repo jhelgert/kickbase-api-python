@@ -219,7 +219,10 @@ class Kickbase:
         r = self._do_get("/leagues/{}/players/{}/stats".format(league_id, player_id), True)
 
         if r.status_code == 200:
-            q = {**r.json()['leaguePlayer'], **{'marketValues': r.json()['marketValues']}}
+            if 'leaguePlayer' in r.json().keys():
+                q = {**r.json()['leaguePlayer'], **{'marketValues': r.json()['marketValues']}}
+            else:
+                q = {'marketValues': r.json()['marketValues']}
             return PlayerStats(q)
         else:
             raise KickbaseException()
