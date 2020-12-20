@@ -5,7 +5,7 @@ from datetime import datetime
 class PlayerStats(BaseModel):
     market_value_change: int = None
     market_value_change_percent: float = None
-    market_values: List[dict[datetime, float]] = None
+    market_values = None
 
     def __init__(self, d: dict = {}):
         self._json_transform = {
